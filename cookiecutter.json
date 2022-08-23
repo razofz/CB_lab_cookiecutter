@@ -9,7 +9,6 @@
     "project_name": "{{ cookiecutter.lab_leader_initials }}_{{ cookiecutter.data_owner_initials }}_{{ cookiecutter.short_desc }}",
     "repo_name": "{{ cookiecutter.project_name.replace(' ', '_').replace('-', '_') }}",
     "description": "A short description of the project.",
-    "open_source_license": ["MIT", "BSD-3-Clause", "No license file"],
     "cpu_cores": 16,
     "max_memory_to_use_in_gb": 60,
     "rng_seed": 12345
