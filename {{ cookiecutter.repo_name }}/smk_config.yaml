@@ -1,0 +1,23 @@
+---
+samples:
+  1: "stim"
+  2: "ctrl"
+samples_longname:
+  1: "stimulated"
+  2: "control"
+adhoc_dir: "data/adhoc/"
+external_dir: "data/external/"
+interim_dir: "data/interim/"
+processed_dir: "data/processed/"
+raw_dir: "data/raw/"
+report_dir: "reports/"
+docs_dir: "docs/"
+data_owner: "{{ cookiecutter.lab_leader_initials }}_{{ cookiecutter.data_owner_initials }}"
+data_owner_longname: "{{ cookiecutter.lab_leader }}: {{ cookiecutter.data_owner }}"
+project_name: "{{ cookiecutter.project_name }}"
+n_threads: {{ cookiecutter.cpu_cores }}
+max_memory_to_use_in_gb: {{ cookiecutter.max_memory_to_use_in_gb }}
+seed: 12345
+filtering_params:
+  lower: 0
+  higher: 99999
