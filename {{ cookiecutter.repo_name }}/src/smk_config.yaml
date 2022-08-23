@@ -15,8 +15,8 @@ docs_dir: "docs/"
 data_owner: "{{ cookiecutter.lab_leader_initials }}_{{ cookiecutter.data_owner_initials }}"
 data_owner_longname: "{{ cookiecutter.lab_leader }}: {{ cookiecutter.data_owner }}"
 project_name: "{{ cookiecutter.project_name }}"
-n_threads: {{ cookiecutter.cpu_cores }}
-max_memory_to_use_in_gb: {{ cookiecutter.max_memory_to_use_in_gb }}
+n_threads: 8
+max_memory_to_use_in_gb: 16
 seed: {{ cookiecutter.rng_seed }}
 filtering_params:
   lower: 0

@@ -1,1 +1,9 @@
-config: "smk_config.yaml"
+rule generate_environments:
+    input:
+        yamls=glob_wildcards("envs/{env}.yaml")
+    output:
+        marker=".markers/environments_generated.marker"
+    shell:
+        "echo mamba create -f {input.yamls}"
+
+

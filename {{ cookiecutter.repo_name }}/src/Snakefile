@@ -1,0 +1,13 @@
+config: "smk_config.yaml"
+
+report: "reports/smk_report_captions/workflow.rst"
+
+
+rule generate_snakemake_report:
+    input:
+    output:
+        report="reports/snakemake_report.html"
+    shell:
+        "snakemake --report {output.report}"
+
+
