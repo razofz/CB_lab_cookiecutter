@@ -17,7 +17,7 @@ data_owner_longname: "{{ cookiecutter.lab_leader }}: {{ cookiecutter.data_owner 
 project_name: "{{ cookiecutter.project_name }}"
 n_threads: {{ cookiecutter.cpu_cores }}
 max_memory_to_use_in_gb: {{ cookiecutter.max_memory_to_use_in_gb }}
-seed: 12345
+seed: {{ cookiecutter.rng_seed }}
 filtering_params:
   lower: 0
   higher: 99999
