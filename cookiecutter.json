@@ -5,11 +5,9 @@
     "data_owner_initials": "{{ cookiecutter.data_owner | title | list | select('upper') | join | string }}",
     "lab_leader": "Laboriel Leaderson",
     "lab_leader_initials": "{{ cookiecutter.lab_leader | title | list | select('upper') | join | string }}",
-    "short_desc": "A one-word description of project (e. g. analysis, ATACseq, fetal-liver).",
-    "project_name": "{{ cookiecutter.lab_leader_initials }}_{{ cookiecutter.data_owner_initials }}_{{ cookiecutter.short_desc }}",
+    "one_word_description": "analysis",
+    "project_name": "{{ cookiecutter.lab_leader_initials }}_{{ cookiecutter.data_owner_initials }}_{{ cookiecutter.one_word_description }}",
     "repo_name": "{{ cookiecutter.project_name.replace(' ', '_').replace('-', '_') }}",
     "description": "A short description of the project.",
-    "cpu_cores": 16,
-    "max_memory_to_use_in_gb": 60,
     "rng_seed": 12345
 }
