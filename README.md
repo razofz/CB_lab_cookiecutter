@@ -99,7 +99,6 @@ From `src/smk_config.yaml`:
 processed_dir: "data/processed/"
 raw_dir: "data/raw/"
 report_dir: "reports/"
-docs_dir: "docs/"
 data_owner: "CB_SP"
 data_owner_longname: "Charlotta Böijers: Sara Palo"
 project_name: "CB_SP_atac"
@@ -147,19 +146,23 @@ The idea is to make use of tools such as:
 - [conda](https://docs.conda.io/en/latest/)
   - A [package manager](https://en.wikipedia.org/wiki/Package_manager) for Python and R packages.
   - [Conda tutorial](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html)
+- [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/) and
+  [Jupyter notebooks](https://jupyterlab.readthedocs.io/en/stable/user/notebook.html).
 - [jupytext](https://jupytext.readthedocs.io/en/latest/)
-  - A tool that converts between .ipynb and (e.g.) .py format. The reason for
-    this is that .ipynb are basically in json format, and contains all cell
-    outputs. This makes them not suited for version control, since e.g. a small
-    figure title change in a plot can generate a very big diff. So we do not
-    keep .ipynb files in version control, but auto-convert them to .py files,
-    with no outputs saved, and version control those. Then all diffs are
-    changes in the actual code.
+  - A tool that converts between .ipynb (Jupyter notebooks) and (e.g.) .py
+    format. The reason for this is that .ipynb are basically in json format,
+    and contains all cell outputs. This makes them not suited for version
+    control, since e.g. a small figure title change in a plot can generate a
+    very big diff. So we do not keep .ipynb files in version control, but
+    auto-convert them to .py files, with no outputs saved, and version control
+    those. Then all diffs are changes in the actual code.
 - [direnv](https://direnv.net/)
   - A tool for [environment variables](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html).
     As default only used to provide a `$PROJECT_PATH` env variable, so all
     scripts etc can refer to the project root. Partly because it is easier,
-    partly to minimise personal information we give out.  
+    partly to minimise personal information we give out (small in this case,
+    username and possibly on what architecture or even computer this was run,
+    but it is basically unnecessary to include even that).
 
 ### Good principles
 
@@ -215,10 +218,21 @@ This is why there are several sub-directories in the `data` dir:
   expressed genes for clusters or subsets of the data, umap plots, rds files
   with a processed Seurat object, anything that is results and/or relevant for
   the paper.
-- `raw` is for the *immutable*, raw data. For sequencing data, the count
-  matrices/Cellranger output. ***Never*** write to this, or edit the data.
-  Everything to do with this dir should *read* from it, and then write to
-  somewhere else (e.g. `interim` or `processed`).
+- `raw` is for the *immutable*, raw data. Data that has been generated in/by
+  this project. For sequencing data, the count matrices/Cellranger output.
+  ***Never*** write to this, or edit the data. Everything to do with this dir
+  should *read* from it, and then write to somewhere else (e.g. `interim` or
+  `processed`). 
+  - *(By "write" here is meant writing programmatically, of course
+  copying the raw data to the `raw` dir in the beginning of the analysis should
+  be done, or if new data arises.)*
+
+The idea here, in relations to the tools above, is that the `interim` and
+`processed` dir is only written to by Snakemake rules. Before that (before
+being part of the "official" analysis), one writes to the `adhoc` dir, either
+through adhoc Python or R scripts, or jupyter notebooks. The `raw` and
+`external` dirs are read from by both Snakemake rules and adhoc
+scripts/notebooks.
 
 > *"The first step in reproducing an analysis is always reproducing the
 > computational environment it was run in. You need the same tools, the same
@@ -230,4 +244,4 @@ get an underlying "computer" that ensures everything not installed by conda is
 the same between different persons and physical computers. With Snakemake we
 specify what conda environment and Docker container is used for each rule.
 
-
+/Rasmus Olofzon
