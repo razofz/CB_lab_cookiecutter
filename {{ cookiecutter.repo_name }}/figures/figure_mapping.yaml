@@ -1,0 +1,16 @@
+---
+mainfigs:
+  fig1:
+    a: "data/processed/seurat/umap.svg"
+    b: [
+      "data/processed/seurat/umap_clusters.svg",
+      "data/processed/seurat/umap_samples.svg",
+    ]
+    c: "data/processed/plot.pdf"
+  fig2:
+    a: "data/processed/python/heatmap.svg"
+    b: "data/processed/python/heatmap_external_data.svg"
+  fig3: "data/processed/plot.svg"
+supfigs:
+  supfig1:
+    "data/processed/filtering/violinplots.pdf"
