@@ -1,9 +1,11 @@
 import os
-import re
 import shutil
-import pandas as pd
 import yaml
 
+
+###########################################
+#  Set working directory to project root  #
+###########################################
 
 def set_project_path():
     try:
@@ -17,15 +19,12 @@ def set_project_path():
 
 set_project_path()
 
+#####################################
+#  Functions for gathering scripts  #
+#####################################
 
 GLOBAL_FIGURES_PATH = "figures/"
 
-# with open("figure_mapping.yaml", "r") as f:
-with open(GLOBAL_FIGURES_PATH + "figmap.yaml", "r") as f:
-    fig_map_dict = yaml.safe_load(f)
-
-print(f"> {len(fig_map_dict['mainfigs'].keys())} main figures,")
-print(f"> {len(fig_map_dict['supfigs'].keys())} supplementary figures.")
 
 def extract_figure_src_dest(key, value, level):
     TAB = str(level*"\t")
@@ -57,8 +56,26 @@ def get_copylist(map_dict):
     return results
 
 
+#################################
+#  Run the gathering functions  #
+#################################
+
+with open(GLOBAL_FIGURES_PATH + "figure_mapping.yaml", "r") as f:
+    fig_map_dict = yaml.safe_load(f)
+
 results = get_copylist(fig_map_dict)
+
+################################
+#  Perform the actual copying  #
+################################
+
 print("\n")
 print(f"{len(results)=}")
 for r in results:
     print(f"cp {r[0]} {r[1]}")
+
+for r in results:
+    try:
+        shutil.copy(r[0], r[1])
+    except Exception:
+        print(f"The copying operation went wrong, for pair: {r}")
