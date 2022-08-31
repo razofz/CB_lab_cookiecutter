@@ -7,6 +7,7 @@ import yaml
 #  Set working directory to project root  #
 ###########################################
 
+
 def set_project_path():
     try:
         path = os.environ["PROJECT_PATH"]
@@ -27,20 +28,26 @@ GLOBAL_FIGURES_PATH = "figures/"
 
 
 def extract_figure_src_dest(key, value, level):
-    TAB = str(level*"\t")
+    TAB = str(level * "\t")
     if isinstance(value, str):
         source = value
         destination = GLOBAL_FIGURES_PATH + key + os.path.splitext(value)[1]
         yield (source, destination)
     elif isinstance(value, dict):
         for subfig in value.items():
-            yield from extract_figure_src_dest(key+subfig[0], subfig[1], level+1)
+            yield from extract_figure_src_dest(
+                key + subfig[0], subfig[1], level + 1
+            )
     elif isinstance(value, list):
         for i in range(len(value)):
-            yield from extract_figure_src_dest(key+str(i+1), value[i], level+1)
+            yield from extract_figure_src_dest(
+                key + str(i + 1), value[i], level + 1
+            )
     else:
-        raise Exception("Something went wrong with the figure gathering, " +
-                        "check that the yaml file is read correctly.")
+        raise Exception(
+            "Something went wrong with the figure gathering, "
+            + "check that the yaml file is read correctly."
+        )
 
 
 def get_copylist(map_dict):
